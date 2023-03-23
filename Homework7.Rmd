@@ -1,0 +1,15 @@
+---
+title: "Homework 7"
+author: "Nathan Catalano"
+date: "2023-03-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+HAPPY <- readRDS("~/Downloads/HAPPY.rds")
+```
+
