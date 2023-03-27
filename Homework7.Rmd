@@ -71,3 +71,13 @@ happy.martial.sex.health %>% ggplot(aes(x = marital, fill = sex)) + geom_bar(aes
 
 Women overwhelmingly score higher on the happiness scale regardless of martial status or personal health. Separated men however in the poor to good personal health score higher on happiness than women. The happiness scores between men and women were most similar when the health was "good". Overall, married couples and those in better health had the highest happiness scores. The lowest overall happiness score besides those with NA values were poor health, divorced men. The exact opposite was the highest: excellent health, married women. 
 
+###Nathan's question
+
+How does the average happiness level change over time between genders?
+
+```{r}
+time.happy=happy %>% group_by(year,sex) %>% summarise(
+  m.happy = mean(as.numeric(happy), na.rm=TRUE), n = n()) %>% arrange(m.happy)
+ggplot(time.happy,aes(x=year,y=m.happy,color=sex))+geom_point()
+```
+The average happiness level stays mostly between 2.3 and 2.1 for all 50 years that this data covers. Women are slightly happier than men for most of the 1970s and 1980s but then the men are happier in more years in the 1990s. Women score higher on the happiness scale for the majority of the years after that. Overall, there is a slight downward shift in the happiness level over time.
