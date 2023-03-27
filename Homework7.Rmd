@@ -51,12 +51,23 @@ HAPPY <- HAPPY %>% mutate(
 ) %>% select(-DEGREE)
 
 HAPPY %>% ggplot(aes(x = degree)) + geom_bar()
+
 ```
 
 ## Part 2
 
 ### Brett's questions
 
-Are married people happier than single people? How does this compare across genders? What about divorced and widowed people? 
+Are married people happier than single people? What about divorced and widowed people? How does this compare across genders?
 
-Within these groups what effect does their financial status have on thier happiness?
+Within these groups what effect does their personal health have on their happiness?
+
+```{r}
+library(classdata)
+
+happy.martial.sex.health = happy %>% group_by(marital, sex, health) %>% summarise(m.happy = mean(as.numeric(happy), na.rm = TRUE), n = n()) %>% arrange(m.happy)
+happy.martial.sex.health %>% ggplot(aes(x = marital, fill = sex)) + geom_bar(aes(weight = m.happy), position = position_dodge()) + facet_grid(.~health) + labs(title = "Happiness on martial status, gender and personal health", y = "Happiness")
+```
+
+Women overwhelmingly score higher on the happiness scale regardless of martial status or personal health. Separated men however in the poor to good personal health score higher on happiness than women. The happiness scores between men and women were most similar when the health was "good". Overall, married couples and those in better health had the highest happiness scores. The lowest overall happiness score besides those with NA values were poor health, divorced men. The exact opposite was the highest: excellent health, married women. 
+
