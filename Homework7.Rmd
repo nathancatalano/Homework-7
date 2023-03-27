@@ -53,7 +53,10 @@ HAPPY <- HAPPY %>% mutate(
 HAPPY %>% ggplot(aes(x = degree)) + geom_bar()
 ```
 
-```{r}
+## Part 2
 
-```
+### Brett's questions
 
+Are married people happier than single people? How does this compare across genders? What about divorced and widowed people? 
+
+Within these groups what effect does their financial status have on thier happiness?
