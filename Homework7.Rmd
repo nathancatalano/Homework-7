@@ -10,6 +10,50 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-HAPPY <- readRDS("~/Downloads/HAPPY.rds")
+HAPPY <- readRDS("HAPPY.rds")
+```
+
+## Part 1 
+
+### Step 1
+
+```{r}
+library(dplyr)
+HAPPY <- HAPPY %>% mutate(
+  happy = factor(tolower(HAPPY))
+) %>% select(-HAPPY)
+```
+
+```{r}
+HAPPY <- replace(HAPPY, HAPPY == "IAP", NA)
+HAPPY <- replace(HAPPY, HAPPY == "DK", NA)
+HAPPY <- replace(HAPPY, HAPPY == "NA", NA)
+```
+
+### Step 2
+
+```{r}
+library(ggplot2)
+HAPPY <- HAPPY %>% mutate(
+  age = replace(AGE, AGE == "89 OR OLDER", 89),
+  age = as.numeric(age)
+) %>% select(-AGE)
+
+HAPPY %>% ggplot(aes(x = age)) + geom_histogram(binwidth=1)
+```
+
+### Step 3
+
+```{r}
+HAPPY <- HAPPY %>% mutate(
+  degree = factor(tolower(DEGREE)),
+  degree = factor(degree, levels=c("lt high school", "high school", "junior college", "bachelor", "graduate school"))
+) %>% select(-DEGREE)
+
+HAPPY %>% ggplot(aes(x = degree)) + geom_bar()
+```
+
+```{r}
+
 ```
 
